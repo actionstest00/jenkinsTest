@@ -1,43 +1,29 @@
-pipeline {
+// 所有脚本命令包含在pipeline{}中
+pipeline {  
+	// 指定任务在哪个节点执行（Jenkins支持分布式）
     agent any
+    
+    // 配置全局环境，指定变量名=变量值信息
     environment{
-        harborHost = '192.168.91.129:80'
-        harborRepo = 'repository'
-        harborUser = 'DevOps'
-        harborPasswd = 'P@ssw0rd'
+    	host = '192.168.11.11'
     }
 
     // 存放所有任务的合集
     stages {
-
-        stage('拉取Git代码') {
+    	// 单个任务
+        stage('任务1') {
+        	// 实现任务的具体流程
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '${tag}']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/iSmartSV/jenkinsTest.git']]])
+                echo 'do something'
             }
         }
-
-        stage('构建代码') {
+		// 单个任务
+        stage('任务2') {
+        	// 实现任务的具体流程
             steps {
-                sh '/var/jenkins_home/maven/bin/mvn clean package -DskipTests'
+                echo 'do something'
             }
         }
-
-        stage('检测代码质量') {
-            steps {
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=${JOB_NAME} -Dsonar.projectKey=${JOB_NAME} -Dsonar.java.binaries=target/ -Dsonar.login=155Jq5pu3245d4418M19YnRvau7Rc14hVBd0e1fa'
-            }
-        }
-
-        stage('制作自定义镜像并发布Harbor') {
-            steps {
-                sh '''cp ./target/*.jar ./docker/
-                cd ./docker
-                docker build -t ${JOB_NAME}:${tag} ./'''
-
-                sh '''docker login -u ${harborUser} -p ${harborPasswd} ${harborHost}
-                docker tag ${JOB_NAME}:${tag} ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}
-                docker push ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}'''
-            }
-        }
+        // ……
     }
 }
