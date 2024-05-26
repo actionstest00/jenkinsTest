@@ -66,7 +66,40 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <!-- SonarQube 服务器地址 -->
+                <sonar.host.url>http://192.168.91.129:9000</sonar.host.url>
+                <sonar.login>admin</sonar.login>
+                <sonar.password>adminadmin</sonar.password>
+                <!-- 项目密钥 -->
+                <sonar.projectKey>your-project-key</sonar.projectKey>
+                <!-- 项目名称 -->
+                <sonar.projectName>Project Name</sonar.projectName>
+                <!-- 项目版本 -->
+                <sonar.projectVersion>1.0</sonar.projectVersion>
+                <!-- 项目源代码路径 -->
+                <sonar.sources>src/main/java</sonar.sources>
+                <!-- 测试代码路径 -->
+                <sonar.tests>src/test/java</sonar.tests>
+                <!-- 编译输出目录 -->
+                <sonar.java.binaries>target/classes</sonar.java.binaries>
+                <!-- 可选：测试报告路径 -->
+                <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
