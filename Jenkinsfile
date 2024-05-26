@@ -24,7 +24,7 @@ pipeline {
 
         stage('检测代码质量') {
             steps {
-                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=${JOB_NAME} -Dsonar.projectKey=${JOB_NAME} -Dsonar.java.binaries=target/ -Dsonar.login=fd067564e4e88db9624da305bb4510d2bbdc8a4e'
+                sh '/var/jenkins_home/sonar-scanner/bin/sonar-scanner -Dsonar.sources=./ -Dsonar.projectname=${JOB_NAME} -Dsonar.projectKey=${JOB_NAME} -Dsonar.java.binaries=target/ -Dsonar.login=155Jq5pu3245d4418M19YnRvau7Rc14hVBd0e1fa'
             }
         }
 
