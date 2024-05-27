@@ -30,7 +30,7 @@ pipeline {
 
         stage('制作自定义镜像并发布Harbor') {
             steps {
-                sh '''cp ./target/*.jar ./docker/
+                sh '''cp ./target/*.jar ./
                 docker build -t ${JOB_NAME}:${tag} ./'''
 
                 sh '''docker login -u ${harborUser} -p ${harborPasswd} ${harborHost}
