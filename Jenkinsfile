@@ -3,8 +3,8 @@ pipeline {
     environment{
         harborHost = '192.168.91.129:80'
         harborRepo = 'repository'
-        harborUser = 'DevOps'
-        harborPasswd = 'P@ssw0rd'
+        harborUser = 'admin'
+        harborPasswd = 'Harbor12345'
     }
 
     // 存放所有任务的合集
