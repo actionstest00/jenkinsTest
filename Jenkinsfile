@@ -24,7 +24,7 @@ pipeline {
 
         stage('检测代码质量') {
             steps {
-                sh '/var/jenkins_home/apache-maven-3.9.6/bin/mvn sonar:sonar' 
+                sh '/var/jenkins_home/apache-maven-3.9.6/bin/mvn sonar:sonar -P sonar' 
             }
         }
 
