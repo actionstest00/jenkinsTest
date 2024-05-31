@@ -9,6 +9,6 @@ public class JenkinsTest {
     @RequestMapping("/test")
     @ResponseBody
     public String test() {
-        return "Hello v562";
+        return "Hello v5662";
     }
 }
