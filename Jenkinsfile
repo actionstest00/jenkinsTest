@@ -6,9 +6,7 @@ pipeline {
         harborUser = 'admin'
         harborPasswd = 'Harbor12345'
     }
-    parameters {
-        string(name: 'tag', defaultValue: 'v10', description: 'Git branch or tag to build')
-    }
+
     // 存放所有任务的合集
     stages {
 
