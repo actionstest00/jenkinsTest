@@ -52,9 +52,10 @@ pipeline {
     }
 }
 def getHarborTags() {
+    node {
     // 获取 Harbor 镜像标签
     def response = sh(script: "curl -u ${env.harborUser}:${env.harborPasswd} ${env.harborHost}/projects/${env.HARBOR_PROJECT}/repositories/${env.harborRepo}/artifacts", returnStdout: true).trim()
     def images = readJSON text: response
     def tags = images.collect { it.tags[0].name }
     return tags.join('\n')
-}
+}}
