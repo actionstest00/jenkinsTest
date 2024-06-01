@@ -17,7 +17,9 @@ pipeline {
 
         stage('拉取Git代码') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '${tag}']], extensions: [], userRemoteConfigs: [[credentialsId: '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', url: 'https://github.com/iSmartSV/jenkinsTest.git']]])
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: '${tag}']], extensions: [], userRemoteConfigs: [[credentialsId: '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', url: 'https://github.com/iSmartSV/jenkinsTest.git']]])
+                }
             }
         }
 
