@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        harborHost = '192.168.91.129:80'
+        harborHost = 'http://xbndcxxtytdgshsh3.neiwangyun.net/api/v2.0'
         harborRepo = 'repository'
         harborUser = 'admin'
         harborPasswd = 'Harbor12345'
