@@ -7,10 +7,7 @@ pipeline {
         harborPasswd = 'Harbor12345'
         HARBOR_PROJECT = 'repository/tasktest_pipeline'
     }
-    parameters {
-        choice(name: 'DEPLOY_ACTION', choices: ['Deploy New Version', 'Rollback'], description: 'Choose deploy action')
-        choice(name: 'IMAGE_TAG', choices: getHarborTags(), description: 'Choose the image tag')
-    }
+
 
     // 存放所有任务的合集
     stages {
