@@ -2,10 +2,10 @@ pipeline {
     agent any
     environment{
         harborHost = 'http://xbndcxxtytdgshsh3.neiwangyun.net/api/v2.0'
-        harborRepo = 'repository'
+        harborRepo = 'tasktest_pipeline'
         harborUser = 'admin'
         harborPasswd = 'Harbor12345'
-        HARBOR_PROJECT = 'repository/tasktest_pipeline'
+        HARBOR_PROJECT = 'repository'
     }
     parameters {
         choice(name: 'DEPLOY_ACTION', choices: ['Deploy New Version', 'Rollback'], description: 'Choose deploy action')
