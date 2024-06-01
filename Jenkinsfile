@@ -5,6 +5,11 @@ pipeline {
         harborRepo = 'repository'
         harborUser = 'admin'
         harborPasswd = 'Harbor12345'
+        HARBOR_PROJECT = 'repository/tasktest_pipeline'
+    }
+    parameters {
+        choice(name: 'DEPLOY_ACTION', choices: ['Deploy New Version', 'Rollback'], description: 'Choose deploy action')
+        choice(name: 'IMAGE_TAG', choices: getHarborTags(), description: 'Choose the image tag')
     }
 
     // 存放所有任务的合集
@@ -39,4 +44,11 @@ pipeline {
             }
         }
     }
+}
+def getHarborTags() {
+    // 获取 Harbor 镜像标签
+    def response = sh(script: "curl -u ${env.harborUser}:${env.harborPasswd} ${env.harborHost}/projects/${env.HARBOR_PROJECT}/repositories/${env.harborRepo}/artifacts", returnStdout: true).trim()
+    def images = readJSON text: response
+    def tags = images.collect { it.tags[0].name }
+    return tags.join('\n')
 }
