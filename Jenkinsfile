@@ -33,6 +33,7 @@ pipeline {
         stage('构建代码') {
             steps {
                 script {
+                    error("111111111111111111111")
                     sh '/var/jenkins_home/apache-maven-3.9.6/bin/mvn clean package -DskipTests'
                 }
             }
