@@ -25,25 +25,29 @@ pipeline {
 
         stage('构建代码') {
             steps {
+                                script {
                 sh '/var/jenkins_home/apache-maven-3.9.6/bin/mvn clean package -DskipTests'
-            }
+                                }
+                                }
         }
 
         stage('检测代码质量') {
             steps {
+                                script {
                 sh '/var/jenkins_home/apache-maven-3.9.6/bin/mvn sonar:sonar -P sonar' 
-            }
+            }}
         }
 
         stage('制作自定义镜像并发布Harbor') {
             steps {
+                                script {
                 sh '''cp ./target/*.jar ./
                 docker build -t ${JOB_NAME}:${tag} ./'''
 
                 sh '''docker login -u ${harborUser} -p ${harborPasswd} ${harborHost}
                 docker tag ${JOB_NAME}:${tag} ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}
                 docker push ${harborHost}/${harborRepo}/${JOB_NAME}:${tag}'''
-            }
+            }}
         }
     }
 }
