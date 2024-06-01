@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        harborHost = 'http://xbndcxxtytdgshsh3.neiwangyun.net/api/v2.0'
+        harborHost = 'http://hsz9mxzgnwxhshsh3.neiwangyun.net/api/v2.0'
         harborRepo = 'tasktest_pipeline'
         harborUser = 'admin'
         harborPasswd = 'Harbor12345'
