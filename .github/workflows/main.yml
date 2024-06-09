@@ -1,60 +1,18 @@
-name: CI
-
-on:
-  pull_request:
-    branches:
-      - master
-
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
-  build:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
-
-    - name: Build with Maven
-      run: mvn clean package -DskipTests
-
-    - name: Run unit tests
-      run: mvn test
-
-    - name: Run SonarQube analysis
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn sonar:sonar -Dsonar.projectKey=your-project-key -Dsonar.host.url=http://your-sonarqube-server -Dsonar.login=$SONAR_TOKEN
-
-    - name: Check SonarQube Quality Gate
-      id: quality_gate
-      run: |
-        quality_gate=$(curl -u ${{ secrets.SONAR_TOKEN }}: http://your-sonarqube-server/api/qualitygates/project_status?projectKey=your-project-key)
-        status=$(echo $quality_gate | jq -r '.projectStatus.status')
-        echo "::set-output name=status::$status"
-        if [ "$status" != "OK" ]; then
-          echo "Quality gate failed: $status"
-          exit 1
-        fi
-
-    - name: Report status to GitHub
-      if: always()
-      uses: actions/github-script@v4
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const status = '${{ steps.quality_gate.outputs.status }}'
-          const state = status === 'OK' ? 'success' : 'failure'
-          const description = `SonarQube Quality Gate ${status === 'OK' ? 'Passed' : 'Failed'}`
-          const sha = '${{ github.event.pull_request.head.sha }}'
-          await github.repos.createCommitStatus({
-            ...context.repo,
-            sha: sha,
-            state: state,
-            context: 'SonarQube Quality Gate',
-            description: description,
-            target_url: 'http://your-sonarqube-server/dashboard?id=your-project-key'
-          })
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
