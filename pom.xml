@@ -111,8 +111,9 @@
             <properties>
                 <!-- SonarQube 服务器地址 -->
                 <sonar.host.url>http://192.168.91.129:9000</sonar.host.url>
-                <sonar.login>admin</sonar.login>
-                <sonar.password>adminadmin</sonar.password>
+                <!-- <sonar.login>admin</sonar.login> -->
+                <!-- <sonar.password>adminadmin</sonar.password> -->
+                <!-- <sonar.login>${env.SONAR_TOKEN}</sonar.login> --><!-- 使用环境变量替代直接配置 -->
                 <!-- 项目密钥 -->
                 <sonar.projectKey>your-project-key</sonar.projectKey>
                 <!-- 项目名称 -->
