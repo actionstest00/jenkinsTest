@@ -26,13 +26,12 @@ jobs:
         key: ${{ runner.os }}-sonar
     
     - name: SonarQube Scan
-      uses: SonarSource/sonarqube-scan-action@v1.0
-      with:
-        args: >
-          -Dsonar.projectKey=your-project-key
-          -Dsonar.sources=.
-          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: |
+        mvn clean verify sonar:sonar \
+          -Dsonar.projectKey=your-project-key \
+          -Dsonar.sources=./src \
+          -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.qualitygate.wait=true
     
     - name: Quality Gate Check
