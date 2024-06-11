@@ -27,9 +27,8 @@ jobs:
     
     - name: SonarQube Scan
       run: |
-        mvn clean verify sonar:sonar \
+        mvn clean verify sonar:sonar -Psonar\
           -Dsonar.projectKey=your-project-key \
-          -Dsonar.sources=./src \
           -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.qualitygate.wait=true
